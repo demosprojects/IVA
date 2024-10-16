@@ -132,51 +132,51 @@
 
     <script>
         let incluir3 = false;
-
+    
         function detectarEnter(event) {
             if (event.key === 'Enter') {
                 calcular();
             }
         }
-
+    
         function toggleAdicional() {
             incluir3 = !incluir3;
             document.getElementById('btnCon3').style.backgroundColor = incluir3 ? '#3e8e41' : '#5c6ac4'; // Cambia color del botón
         }
-
+    
         function calcular() {
             let valor = parseFloat(document.getElementById('valor').value);
-
+    
             if (isNaN(valor) || valor <= 0) {
                 document.getElementById('resultado').innerHTML = "Por favor ingresa un valor válido.";
                 document.getElementById('resultado').classList.remove("show");
                 return;
             }
-
+    
             let iva = valor * 0.21;
-            let adicional = valor * 0.0629;
+            let adicional = valor * 0.0629; // Cambiado de 0.0621 a 0.0629
             let total = valor + iva + adicional;
-
+    
             if (incluir3) {
                 let adicional3 = total * 0.03;
                 total += adicional3;
                 document.getElementById('resultado').innerHTML = 
                     "Valor original: $" + valor.toFixed(2) + "<br>" +
                     "IVA (21%): $" + iva.toFixed(2) + "<br>" +
-                    "Adicional (6.29%): $" + adicional.toFixed(2) + "<br>" +
-                    "3% adicional: $" + adicional3.toFixed(2) + "<br>" +
+                    "Porcentaje MercadoPago (6.29%): $" + adicional.toFixed(2) + "<br>" + // Cambiado aquí
+                    "3% adicional (IIBB): $" + adicional3.toFixed(2) + "<br>" +
                     "<strong>Total: $" + total.toFixed(2) + "</strong>";
             } else {
                 document.getElementById('resultado').innerHTML = 
                     "Valor original: $" + valor.toFixed(2) + "<br>" +
                     "IVA (21%): $" + iva.toFixed(2) + "<br>" +
-                    "Adicional (6.29%): $" + adicional.toFixed(2) + "<br>" +
+                    "Porcentaje MercadoPago (6.29%): $" + adicional.toFixed(2) + "<br>" + // Cambiado aquí
                     "<strong>Total: $" + total.toFixed(2) + "</strong>";
             }
-
+    
             document.getElementById('resultado').classList.add("show");
         }
     </script>
+    
 </body>
 </html>
-
