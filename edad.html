@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Edad</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: #0074ff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Calculadora de Edad</h2>
+
+    <label>Fecha de nacimiento</label>
+    <input type="date" id="fechaNacimiento">
+
+    <button onclick="calcular()">Calcular Edad</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      const input = document.getElementById("fechaNacimiento").value;
+      const salida = document.getElementById("resultado");
+
+      if (!input) {
+        salida.innerHTML = "⚠️ Ingresá una fecha válida.";
+        return;
+      }
+
+      const nacimiento = new Date(input);
+      const hoy = new Date();
+
+      let edad = hoy.getFullYear() - nacimiento.getFullYear();
+      const mes = hoy.getMonth() - nacimiento.getMonth();
+
+      // Ajustar si aún no cumplió años este año
+      if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+        edad--;
+      }
+
+      let estado = edad >= 18 ? "🟢 Mayor de edad" : "🔴 Menor de edad";
+
+      salida.innerHTML = `Tiene <b>${edad}</b> años.<br>${estado}`;
+    }
+  </script>
+
+</body>
+</html>
