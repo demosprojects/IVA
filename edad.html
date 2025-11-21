@@ -53,8 +53,17 @@
   </div>
 
   <script>
+    const input = document.getElementById("anio");
+
+    // Ejecutar al presionar ENTER
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        calcular();
+      }
+    });
+
     function calcular() {
-      const anio = parseInt(document.getElementById("anio").value);
+      const anio = parseInt(input.value);
       const salida = document.getElementById("resultado");
       const anioActual = 2025;
 
